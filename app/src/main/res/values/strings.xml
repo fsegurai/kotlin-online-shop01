@@ -5,4 +5,6 @@
     <string name="intro_text">Browse the latest styles from top brands \nGet personalized recommendations \nEnjoy fast, free shipping</string>
     <string name="intro_signup">Let\'s get started</string>
     <string name="intro_signin">Already have an account? <font color="#6033BA">Sign in</font></string>
+    <string name="intro_main_welcome">Welcome Back</string>
+    <string name="intro_main_user">Gaxes</string>
 </resources>
