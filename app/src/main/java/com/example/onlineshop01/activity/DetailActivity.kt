@@ -1,5 +1,6 @@
 package com.example.onlineshop01.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -43,7 +44,7 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun getBundle() {
-        item = intent.getParcelableExtra("object")!!
+        item = intent.getParcelableExtra("object")!!;
         binding.titleTxt.text = item.title;
         binding.descriptionTxt.text = item.description;
         binding.priceTxt.text = "$${item.price}";
@@ -56,7 +57,7 @@ class DetailActivity : BaseActivity() {
             finish();
         }
         binding.cartBtn.setOnClickListener {
-
+            startActivity(Intent(this@DetailActivity, CartActivity::class.java));
         }
     }
 

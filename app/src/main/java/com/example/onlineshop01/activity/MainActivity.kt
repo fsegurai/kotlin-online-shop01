@@ -1,5 +1,6 @@
 package com.example.onlineshop01.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -41,6 +42,7 @@ class MainActivity : BaseActivity() {
         initBanner();
         initBrand();
         initPopularItems();
+        initBottomNavigation();
     }
 
     /**
@@ -100,11 +102,23 @@ class MainActivity : BaseActivity() {
     private fun initPopularItems() {
         binding.progressBarPopular.visibility = View.VISIBLE;
         viewModel.popularItems.observe(this, Observer {
-            binding.viewPopular.layoutManager = GridLayoutManager(this@MainActivity, 2); // Set the layout manager to a grid layout manager with 2 columns.
+            binding.viewPopular.layoutManager = GridLayoutManager(
+                this@MainActivity,
+                2
+            ); // Set the layout manager to a grid layout manager with 2 columns.
             binding.viewPopular.adapter = PopularItemAdapter(it);
             binding.progressBarPopular.visibility = View.GONE;
         });
 
         viewModel.loadPopularItems();
+    }
+
+    /**
+     * Initialize the bottom navigation.
+     */
+    private fun initBottomNavigation() {
+        binding.cartBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CartActivity::class.java));
+        }
     }
 }
