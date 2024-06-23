@@ -2,12 +2,14 @@ package com.example.onlineshop01.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.example.onlineshop01.activity.DetailActivity
 import com.example.onlineshop01.databinding.ViewholderRecommendedBinding
 import com.example.onlineshop01.model.ItemModel
 
@@ -36,9 +38,11 @@ class PopularItemAdapter(
             .apply(requestOptions)
             .into(holder.binding.pic);
 
-//        holder.binding.root.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, ItemDetailActivity::class.java);
-//        }
+        holder.binding.root.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java);
+            intent.putExtra("object", items[position]);
+            holder.itemView.context.startActivity(intent);
+        }
     }
 
     /**
