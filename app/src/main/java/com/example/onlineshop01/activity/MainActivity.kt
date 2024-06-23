@@ -3,18 +3,19 @@ package com.example.onlineshop01.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.onlineshop01.R
-import com.example.onlineshop01.SliderAdapter
+import com.example.onlineshop01.adapter.BrandAdapter
+import com.example.onlineshop01.adapter.SliderAdapter
 import com.example.onlineshop01.databinding.ActivityMainBinding
 import com.example.onlineshop01.model.SliderModel
-import com.example.onlineshop01.view_model.MainViewModel
+import com.example.onlineshop01.viewModel.MainViewModel
 
 class MainActivity : BaseActivity() {
     private val viewModel = MainViewModel();
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity() {
         };
 
         initBanner();
+        initBrand();
     }
 
     /**
@@ -53,6 +55,7 @@ class MainActivity : BaseActivity() {
 
     /**
      * Display the banners.
+     * @param images The list of images to display.
      */
     private fun banners(images: List<SliderModel>) {
         binding.viewpagerSlider.adapter = SliderAdapter(images, binding.viewpagerSlider);
@@ -71,5 +74,20 @@ class MainActivity : BaseActivity() {
             binding.dotsIndicator.visibility = View.VISIBLE;
             binding.dotsIndicator.attachTo(binding.viewpagerSlider);
         }
+    }
+
+    /**
+     * Initialize the brand.
+     */
+    private fun initBrand() {
+        binding.progressBarBrand.visibility = View.VISIBLE;
+        viewModel.brands.observe(this, Observer {
+            binding.viewBrand.layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
+            binding.viewBrand.adapter = BrandAdapter(it);
+            binding.progressBarBrand.visibility = View.GONE;
+        });
+
+        viewModel.loadBrand();
     }
 }
