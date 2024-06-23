@@ -3,16 +3,17 @@ package com.example.onlineshop01.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.onlineshop01.MainActivity
 import com.example.onlineshop01.R
 import com.example.onlineshop01.databinding.ActivityIntroBinding
 
 class IntroActivity : BaseActivity() {
     private lateinit var binding: ActivityIntroBinding;
 
+    /**
+     * Create the intro activity.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,6 +25,9 @@ class IntroActivity : BaseActivity() {
             insets
         }
 
+        /**
+         * Start the main activity when the start button is clicked.
+         */
         binding.startBtn.setOnClickListener {
             startActivity(Intent(this@IntroActivity, MainActivity::class.java))
         }

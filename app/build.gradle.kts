@@ -59,7 +59,6 @@ dependencies {
 
     // ViewModel
     implementation(libs.androidx.activity.ktx)
-
     implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.dotsindicator)
