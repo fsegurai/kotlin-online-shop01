@@ -6,12 +6,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.onlineshop01.R
 import com.example.onlineshop01.adapter.BrandAdapter
+import com.example.onlineshop01.adapter.PopularItemAdapter
 import com.example.onlineshop01.adapter.SliderAdapter
 import com.example.onlineshop01.databinding.ActivityMainBinding
 import com.example.onlineshop01.model.SliderModel
@@ -38,6 +40,7 @@ class MainActivity : BaseActivity() {
 
         initBanner();
         initBrand();
+        initPopularItems();
     }
 
     /**
@@ -89,5 +92,19 @@ class MainActivity : BaseActivity() {
         });
 
         viewModel.loadBrand();
+    }
+
+    /**
+     * Initialize the popular items.
+     */
+    private fun initPopularItems() {
+        binding.progressBarPopular.visibility = View.VISIBLE;
+        viewModel.popularItems.observe(this, Observer {
+            binding.viewPopular.layoutManager = GridLayoutManager(this@MainActivity, 2); // Set the layout manager to a grid layout manager with 2 columns.
+            binding.viewPopular.adapter = PopularItemAdapter(it);
+            binding.progressBarPopular.visibility = View.GONE;
+        });
+
+        viewModel.loadPopularItems();
     }
 }
